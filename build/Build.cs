@@ -110,10 +110,12 @@ class Build : NukeBuild
       {
         try
         {
+          bool havePreReleaseLabel = !string.IsNullOrEmpty(GitVersion.PreReleaseLabel);
+
           VersionDetails = new VersionDetails
           {
             PackageVersionPrefix = GitVersion.MajorMinorPatch,
-            PackageVersionSuffix = GitVersion.PreReleaseTag,
+            PackageVersionSuffix = havePreReleaseLabel ? GitVersion.PreReleaseTag : string.Empty,
             Version = GitVersion.SemVer,
             AssemblyVersion = GitVersion.AssemblySemVer,
             FileVersion = GitVersion.AssemblySemFileVer,
