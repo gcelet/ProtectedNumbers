@@ -110,20 +110,6 @@ class Build : NukeBuild
       {
         try
         {
-          // string semVer = GitVersion.SemVer;
-          //
-          // if (IsPullRequest)
-          // {
-          //   Information(
-          //     "Branch spec {branchspec} is a pull request. Adding build number {buildnumber}",
-          //     BranchSpec, BuildNumber);
-          //
-          //   semVer = string.Join('.', GitVersion.SemVer.Split('.').Take(3).Union(new[]
-          //   {
-          //     BuildNumber
-          //   }));
-          // }
-
           VersionDetails = new VersionDetails
           {
             PackageVersionPrefix = GitVersion.MajorMinorPatch,
@@ -312,7 +298,8 @@ class Build : NukeBuild
       .Description($"Publishing to NuGet with the version.")
       .Requires(() => Configuration.Equals(Configuration.Release))
       .DependsOn(Pack)
-      .OnlyWhenStatic(() => !string.IsNullOrEmpty(NuGetApiKey) && GitRepository.IsOnMainOrMasterBranch())
+      .OnlyWhenStatic(() => !string.IsNullOrEmpty(NuGetApiKey) &&
+                            (GitRepository.IsOnMainOrMasterBranch() || IsTag))
       .Executes(() =>
       {
         PublishNugetDirectory.GlobFiles("*.nupkg")
