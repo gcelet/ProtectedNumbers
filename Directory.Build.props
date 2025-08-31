@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup Label="Package common info">
+    <Copyright>Copyright (c) 2025-$([System.DateTime]::Now.ToString(yyyy)) Grégory Célet. All rights reserved.</Copyright>
+    <Authors>Grégory Célet</Authors>
+    <RepositoryUrl>https://github.com/gcelet/ProtectedNumbers</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
+    <PackageReleaseNotes>https://github.com/gcelet/ProtectedNumbers/releases</PackageReleaseNotes>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PackageReleaseNotes>• Fixed bugs</PackageReleaseNotes>
+  </PropertyGroup>
+</Project>

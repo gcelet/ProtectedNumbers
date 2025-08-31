@@ -1,0 +1,86 @@
+﻿### 01 > Minimal Api > 01 > Get all sample objects
+GET {{host}}{{minimal-api-path}}{{samples-objects-path}}
+
+### 01 > Minimal Api > 02 > Get sample object by protected id
+GET {{host}}{{minimal-api-path}}{{samples-objects-path}}/{{samples-objects-protected-id}}
+
+### 01 > Minimal Api > 03 > Search sample object
+GET {{host}}{{minimal-api-path}}{{samples-objects-path}}{{search-path}}?id={{samples-objects-protected-id}}&ids={{samples-objects-protected-id}}
+
+### 01 > Minimal Api > 04 > Search sample object using object search
+GET {{host}}{{minimal-api-path}}{{samples-objects-path}}{{search-by-object-path}}?id={{samples-objects-protected-id}}&ids={{samples-objects-protected-id}}
+
+### 01 > Minimal Api > 05 > Save an existing sample object
+PUT {{host}}{{minimal-api-path}}{{samples-objects-path}}
+Content-Type: application/json
+
+{
+  "id": "{{samples-objects-protected-id}}",
+  "name": "{{$isoTimestamp}}"
+}
+
+### 01 > Minimal Api > 06 > Save a new sample object
+PUT {{host}}{{minimal-api-path}}{{samples-objects-path}}
+Content-Type: application/json
+
+{
+  "name": "{{$isoTimestamp}}"
+}
+
+### 02 > MVC > 01 > Get all sample objects
+GET {{host}}{{mvc-path}}{{samples-objects-path}}
+
+### 02 > MVC > 02 > Get sample object by protected id
+GET {{host}}{{mvc-path}}{{samples-objects-path}}/{{samples-objects-protected-id}}
+
+### 02 > MVC > 03 > Search sample object
+GET {{host}}{{mvc-path}}{{samples-objects-path}}{{search-path}}?id={{samples-objects-protected-id}}&ids={{samples-objects-protected-id}}
+
+### 02 > MVC > 04 > Search sample object using object search
+GET {{host}}{{mvc-path}}{{samples-objects-path}}{{search-by-object-path}}?id={{samples-objects-protected-id}}&ids={{samples-objects-protected-id}}
+
+### 02 > MVC > 05 > Save an existing sample object
+PUT {{host}}{{mvc-path}}{{samples-objects-path}}
+Content-Type: application/json
+
+{
+  "id": "{{samples-objects-protected-id}}",
+  "name": "{{$isoTimestamp}}"
+}
+
+### 02 > MVC > 06 > Save a new sample object
+PUT {{host}}{{mvc-path}}{{samples-objects-path}}
+Content-Type: application/json
+
+{
+  "name": "{{$isoTimestamp}}"
+}
+
+### 03 > Fast Endpoints > 01 > Get all sample objects
+GET {{host}}{{fast-endpoints-path}}{{samples-objects-path}}
+
+### 03 > Fast Endpoints > 02 > Get sample object by protected id
+GET {{host}}{{fast-endpoints-path}}{{samples-objects-path}}/{{samples-objects-protected-id}}
+
+### 03 > Fast Endpoints > 03 > Search sample object
+GET {{host}}{{fast-endpoints-path}}{{samples-objects-path}}{{search-path}}?id={{samples-objects-protected-id}}&ids={{samples-objects-protected-id}}
+
+### 03 > Fast Endpoints > 04 > Search sample object using object search
+GET {{host}}{{fast-endpoints-path}}{{samples-objects-path}}{{search-by-object-path}}?id={{samples-objects-protected-id}}&ids={{samples-objects-protected-id}}
+
+### 03 > Fast Endpoints > 05 > Save an existing sample object
+PUT {{host}}{{fast-endpoints-path}}{{samples-objects-path}}
+Content-Type: application/json
+
+{
+  "id": "{{samples-objects-protected-id}}",
+  "name": "{{$isoTimestamp}}"
+}
+
+### 03 > Fast Endpoints > 06 > Save a new sample object
+PUT {{host}}{{fast-endpoints-path}}{{samples-objects-path}}
+Content-Type: application/json
+
+{
+  "name": "{{$isoTimestamp}}"
+}

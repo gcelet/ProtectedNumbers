@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package info">
+    <PackageDescription>
+      A .NET library for safe, opaque numeric identifiers you can pass through URLs, JSON, and model binding
+    </PackageDescription>
+    <PackageProjectUrl>https://github.com/gcelet/ProtectedNumbers</PackageProjectUrl>
+    <PackageTags>
+      protected-numbers;secure-ids;encrypted-ids;id-protection;id-obfuscation;opaque-identifiers;sequential-id-protection;anti-enumeration;IDOR-mitigation;data-protection;aspnetcore;model-binding;system-text-json;minimal-apis;microsoft-dataprotection
+    </PackageTags>
+    <PackageIcon>PackageIcon.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DocumentationFile>bin\Debug\ProtectedNumbers.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>bin\Release\ProtectedNumbers.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package files">
+    <None Include="..\..\PackageIcon.png" Pack="true" Visible="false" PackagePath=""/>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath=""/>
+    <None Include="..\..\PackageReadme.md" Pack="true" PackagePath="Readme.md"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ProtectedNumbers.Tests"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSharpGuidelinesAnalyzer">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Meziantou.Analyzer">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SourceLink.GitHub">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PolySharp">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

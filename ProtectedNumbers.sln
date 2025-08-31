@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{54E9DA71-884C-47CB-8234-397722D49CBA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-solutionitems", "00-solutionitems", "{CFD2F704-18DC-4F75-9F91-DD4A58559AAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-build", "01-build", "{28E1E0C8-E214-4118-B592-AE443DB7DFD9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\continuous.yml = .github\workflows\continuous.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-files", "02-files", "{DF741A65-666B-4814-9FF1-361E29BDCC75}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Packages.props = Directory.Packages.props
+		GitVersion.yml = GitVersion.yml
+		README.md = README.md
+		PackageReadme.md = PackageReadme.md
+		Directory.Build.props = Directory.Build.props
+		.editorconfig = .editorconfig
+		.junie\guidelines.md = .junie\guidelines.md
+		PackageIcon.png = PackageIcon.png
+		.config\dotnet-tools.json = .config\dotnet-tools.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-src", "01-src", "{499B92F7-0036-4B5C-AE09-BA6DE023EC76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtectedNumbers", "src\ProtectedNumbers\ProtectedNumbers.csproj", "{66B0C8CE-E238-470F-ABF5-0896D5367564}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-tests", "02-tests", "{3A3D618C-D90D-4050-BF3D-68A67B0A75D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtectedNumbers.Tests", "tst\ProtectedNumbers.Tests\ProtectedNumbers.Tests.csproj", "{029D532A-57A2-4E35-803E-A2071598C043}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-samples", "03-samples", "{FCDBD854-E336-4DAD-9893-0DCD353FCA21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtectedNumbers.Samples", "samples\ProtectedNumbers.Samples\ProtectedNumbers.Samples.csproj", "{49437ECB-B026-4059-B235-C828D7578A40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54E9DA71-884C-47CB-8234-397722D49CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E9DA71-884C-47CB-8234-397722D49CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B0C8CE-E238-470F-ABF5-0896D5367564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B0C8CE-E238-470F-ABF5-0896D5367564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B0C8CE-E238-470F-ABF5-0896D5367564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B0C8CE-E238-470F-ABF5-0896D5367564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{029D532A-57A2-4E35-803E-A2071598C043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{029D532A-57A2-4E35-803E-A2071598C043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{029D532A-57A2-4E35-803E-A2071598C043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{029D532A-57A2-4E35-803E-A2071598C043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49437ECB-B026-4059-B235-C828D7578A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49437ECB-B026-4059-B235-C828D7578A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49437ECB-B026-4059-B235-C828D7578A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49437ECB-B026-4059-B235-C828D7578A40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28E1E0C8-E214-4118-B592-AE443DB7DFD9} = {CFD2F704-18DC-4F75-9F91-DD4A58559AAA}
+		{54E9DA71-884C-47CB-8234-397722D49CBA} = {28E1E0C8-E214-4118-B592-AE443DB7DFD9}
+		{DF741A65-666B-4814-9FF1-361E29BDCC75} = {CFD2F704-18DC-4F75-9F91-DD4A58559AAA}
+		{66B0C8CE-E238-470F-ABF5-0896D5367564} = {499B92F7-0036-4B5C-AE09-BA6DE023EC76}
+		{029D532A-57A2-4E35-803E-A2071598C043} = {3A3D618C-D90D-4050-BF3D-68A67B0A75D7}
+		{49437ECB-B026-4059-B235-C828D7578A40} = {FCDBD854-E336-4DAD-9893-0DCD353FCA21}
+	EndGlobalSection
+EndGlobal
