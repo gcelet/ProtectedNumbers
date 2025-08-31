@@ -30,7 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package files">
-    <None Include="..\..\PackageIcon.png" Pack="true" Visible="false" PackagePath=""/>
+    <None Include="..\..\PackageIcon.png" Pack="true" Visible="false" PackagePath="PackageIcon.png"/>
     <None Include="..\..\LICENSE" Pack="true" PackagePath=""/>
     <None Include="..\..\PackageReadme.md" Pack="true" PackagePath="Readme.md"/>
   </ItemGroup>
