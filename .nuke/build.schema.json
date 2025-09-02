@@ -122,6 +122,11 @@
             "Release"
           ]
         },
+        "CoverallsRepoToken": {
+          "type": "string",
+          "description": "coveralls.io repo token. Default is ''",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
         "EnableCoverage": {
           "type": "boolean",
           "description": "Enable coverage"

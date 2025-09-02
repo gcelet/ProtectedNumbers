@@ -24,7 +24,8 @@ using static Serilog.Log;
   {
     "main",
     "develop",
-    "releases/**"
+    "releases/**",
+    "feature/**"
   },
   OnPullRequestBranches = new[]
   {
@@ -38,7 +39,8 @@ using static Serilog.Log;
   EnableGitHubToken = true,
   ImportSecrets = new[]
   {
-    nameof(NuGetApiKey)
+    nameof(NuGetApiKey),
+    nameof(CoverallsRepoToken)
   }
 )]
 class Build : NukeBuild
@@ -52,6 +54,8 @@ class Build : NukeBuild
     [Parameter("NuGet publish url. Default is 'https://api.nuget.org/v3/index.json'")] string NuGetFeed = "https://api.nuget.org/v3/index.json";
 
     [Parameter("NuGet api key. Default is ''"), Secret] readonly string NuGetApiKey;
+
+    [Parameter("coveralls.io repo token. Default is ''"), Secret] readonly string CoverallsRepoToken;
 
     [Parameter("Skip tests")]
     readonly bool SkipTests = false;
@@ -217,21 +221,25 @@ class Build : NukeBuild
 
             if (EnableCoverage)
             {
-                // DotNet($"coverage merge --output-format cobertura --output \"{TestResultFile}\" \"{TestResultsDirectory}/**/*.coverage\"");
                 DotNet($"coverage merge --output-format cobertura --output \"{TestResultFile}\" \"{TestResultsDirectory}/**/*.cobertura.xml\"");
             }
         });
 
     Target ReportCoverage => d => d
       .DependsOn(Test)
+      .OnlyWhenDynamic(() => EnableReports && EnableCoverage)
       .Executes(() =>
       {
         ReportGenerator(s => s
-          //.AddReports(TestResultsDirectory / "**/coverage.cobertura.xml")
           .AddReports(TestResultFile)
-          .AddReportTypes(ReportTypes.lcov, ReportTypes.Html)
+          .AddReportTypes(ReportTypes.lcov, ReportTypes.Cobertura, ReportTypes.Html, ReportTypes.HtmlChart)
           .SetTargetDirectory(CoverageReportDirectory)
           .AddFileFilters("-*.g.cs"));
+
+        if (!string.IsNullOrEmpty(CoverallsRepoToken))
+        {
+          DotNet($"csmacnz.Coveralls --lcov -i \"{CoverageReportDirectory}/lcov.info\" --useRelativePaths --basePath \"{RootDirectory}\"");
+        }
 
         string link = ReportsDirectory / "index.html";
         Information($"Code coverage report: \x1b]8;;file://{link.Replace('\\', '/')}\x1b\\{link}\x1b]8;;\x1b\\");
