@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageDownload Include="coveralls.net" Version="[4.0.1]" />
     <PackageDownload Include="dotnet-coverage" Version="[17.14.2]" />
     <PackageDownload Include="GitVersion.Tool" Version="[6.4.0]" />
     <PackageDownload Include="ReportGenerator" Version="[5.4.12]" />
