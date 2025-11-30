@@ -1,0 +1,47 @@
+﻿// Copyright (c) Grégory Célet. All Rights Reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+namespace ProtectedNumbers.Tests.EndToEnd.Shared.Endpoints.SampleObjects;
+
+using FastEndpoints;
+
+using ProtectedNumbers.Tests.EndToEnd.Shared.Models;
+using ProtectedNumbers.Tests.EndToEnd.Shared.Models.Inputs;
+using ProtectedNumbers.Tests.EndToEnd.Shared.Repositories;
+using ProtectedNumbers.Tests.EndToEnd.Shared.Validators.Inputs;
+
+public class GetByIdEndpoint : Endpoint<GetByIdInput, SampleObject>
+{
+  public GetByIdEndpoint(SampleObjectRepository repository)
+  {
+    Repository = repository;
+  }
+
+  private SampleObjectRepository Repository { get; }
+
+  public override void Configure()
+  {
+    AllowAnonymous();
+    Validator<GetByIdInputValidator>();
+    Get("/samples-objects/{id}");
+  }
+
+  public override Task HandleAsync(GetByIdInput input, CancellationToken cancellationToken)
+  {
+    SampleObject? sampleObject = Repository.GetById(input.Id.GetValueOrDefault(ProtectedNumber.Empty));
+
+    if (sampleObject == null)
+    {
+#if NET6_0
+      return SendNotFoundAsync(cancellationToken);
+#elif NET8_0_OR_GREATER
+      return Send.NotFoundAsync(cancellationToken);
+#endif
+    }
+
+#if NET6_0
+    return SendOkAsync(sampleObject, cancellationToken);
+#elif NET8_0_OR_GREATER
+    return Send.OkAsync(sampleObject, cancellationToken);
+#endif
+  }
+}

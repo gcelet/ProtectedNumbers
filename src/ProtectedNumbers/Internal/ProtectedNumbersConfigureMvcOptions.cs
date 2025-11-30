@@ -53,5 +53,11 @@ internal class ProtectedNumbersConfigureMvcOptions : IConfigureOptions<Microsoft
     {
       options.ModelBinderProviders.Add(new ProtectedNumberModelBinderProvider());
     }
+
+#if NET6_0
+    // Workaround for .NET 6 MVC validation eagerly traversing value objects and invoking getters.
+    // Suppress child validation for ProtectedNumber so MVC doesn't access Value/ProtectedValue during validation.
+    options.ModelMetadataDetailsProviders.Add(new DisableChildValidationForProtectedNumber());
+#endif
   }
 }
