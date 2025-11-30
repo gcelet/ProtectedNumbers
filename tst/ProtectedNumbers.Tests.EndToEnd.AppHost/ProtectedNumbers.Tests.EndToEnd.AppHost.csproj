@@ -1,0 +1,19 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.0.2">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <UserSecretsId>ProtectedNumbers.Tests.EndToEnd</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProtectedNumbers.Tests.EndToEnd.WebApi.Net10\ProtectedNumbers.Tests.EndToEnd.WebApi.Net10.csproj" />
+    <ProjectReference Include="..\ProtectedNumbers.Tests.EndToEnd.WebApi.Net6\ProtectedNumbers.Tests.EndToEnd.WebApi.Net6.csproj" />
+    <ProjectReference Include="..\ProtectedNumbers.Tests.EndToEnd.WebApi.Net8\ProtectedNumbers.Tests.EndToEnd.WebApi.Net8.csproj" />
+    <ProjectReference Include="..\ProtectedNumbers.Tests.EndToEnd.WebApi.Net9\ProtectedNumbers.Tests.EndToEnd.WebApi.Net9.csproj" />
+  </ItemGroup>
+
+</Project>

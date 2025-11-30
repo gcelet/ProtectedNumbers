@@ -204,18 +204,21 @@ class Build : NukeBuild
         .OnlyWhenDynamic(() => !SkipTests)
         .Executes(() =>
         {
-            string dataCollector = EnableCoverage ? "Code Coverage;Format=cobertura" : null;
+          string dataCollector = EnableCoverage ? "XPlat Code Coverage" : null; // coverlet.collector
 
-            DotNetTest(_ => _
-              .SetProjectFile(Solution)
-              .SetConfiguration(Configuration)
-              .EnableNoRestore()
-              .EnableNoBuild()
-              .When(TestResultsDirectory.DirectoryExists(), _ => _
-                .SetResultsDirectory(TestResultsDirectory)
-              )
-              .When(!string.IsNullOrEmpty(dataCollector), _ => _
-                .SetDataCollector(dataCollector)
+          DotNetTest(_ => _
+            .SetProjectFile(Solution)
+            .SetConfiguration(Configuration)
+            .EnableNoRestore()
+            .EnableNoBuild()
+            .When(TestResultsDirectory.DirectoryExists(), _ => _.SetResultsDirectory(TestResultsDirectory))
+            .When(!string.IsNullOrEmpty(dataCollector), t => t
+              .SetDataCollector(dataCollector)
+              .SetProcessAdditionalArguments(
+                  "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura",
+                  "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Include=\"[ProtectedNumbers]*\"",
+                  "-- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude=\"[*.Tests]*\""
+                )
               )
             );
 
