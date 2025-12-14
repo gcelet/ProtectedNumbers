@@ -23,6 +23,30 @@
             ],
             "commitMessagePrefix": ":arrow_down: chore:",
             "commitMessageAction": "downgrade"
+        },
+        {
+          "matchManagers": ["nuget"],
+          "matchDatasources": ["nuget"],
+          "matchFileNames": ["Directory.Packages.props"],
+          "matchPackageNames": ["FastEndpoints"],
+          "matchCurrentVersion": "5.x",
+          "enabled": false
+        },
+        {
+          "matchManagers": ["nuget"],
+          "matchDatasources": ["nuget"],
+          "matchFileNames": ["Directory.Packages.props"],
+          "matchPackageNames": ["Microsoft.NET.Test.Sdk"],
+          "matchCurrentVersion": "17.x",
+          "enabled": false
+        },
+        {
+          "matchManagers": ["nuget"],
+          "matchDatasources": ["nuget"],
+          "matchFileNames": ["Directory.Packages.props"],
+          "matchPackageNames": ["NUnit3TestAdapter"],
+          "matchCurrentVersion": "5.x",
+          "enabled": false
         }
     ]
 }
