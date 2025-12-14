@@ -2,6 +2,6 @@
   <ItemGroup>
     <PackageVersion Include="FastEndpoints" Version="5.35.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="6.0.0" />
   </ItemGroup>
 </Project>
