@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-files", "02-files", "{DF
 		.config\dotnet-tools.json = .config\dotnet-tools.json
 		global.json = global.json
 		.junie\guidelines.md = .junie\guidelines.md
+		renovate.json = renovate.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-src", "01-src", "{499B92F7-0036-4B5C-AE09-BA6DE023EC76}"
