@@ -27,25 +27,25 @@
         {
           "matchManagers": ["nuget"],
           "matchDatasources": ["nuget"],
-          "matchFileNames": ["Directory.Packages.props"],
+          "matchFileNames": ["Directory.Packages.net6.props"],
           "matchPackageNames": ["FastEndpoints"],
-          "matchCurrentVersion": "5.x",
+          "matchCurrentVersion": "<6.0.0",
           "enabled": false
         },
         {
           "matchManagers": ["nuget"],
           "matchDatasources": ["nuget"],
-          "matchFileNames": ["Directory.Packages.props"],
+          "matchFileNames": ["Directory.Packages.net6.props"],
           "matchPackageNames": ["Microsoft.NET.Test.Sdk"],
-          "matchCurrentVersion": "17.x",
+          "matchCurrentVersion": "<17.14.0",
           "enabled": false
         },
         {
           "matchManagers": ["nuget"],
           "matchDatasources": ["nuget"],
-          "matchFileNames": ["Directory.Packages.props"],
+          "matchFileNames": ["Directory.Packages.net6.props"],
           "matchPackageNames": ["NUnit3TestAdapter"],
-          "matchCurrentVersion": "5.x",
+          "matchCurrentVersion": "<6.0.0",
           "enabled": false
         }
     ]

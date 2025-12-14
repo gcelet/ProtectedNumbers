@@ -30,11 +30,7 @@
     <PackageVersion Include="Shouldly" Version="4.3.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageVersion Include="FastEndpoints" Version="5.35.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
-  </ItemGroup>
+  <Import Project="Directory.Packages.net6.props" Condition="'$(TargetFramework)' == 'net6.0'" />
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageVersion Include="Aspire.Hosting.Testing" Version="13.0.2" />
     <PackageVersion Include="FastEndpoints" Version="7.1.1" />
