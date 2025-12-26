@@ -24,7 +24,7 @@
     <PackageReference Include="SharpGrip.FluentValidation.AutoValidation.Endpoints" />
     <PackageReference Include="SharpGrip.FluentValidation.AutoValidation.Mvc" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\ProtectedNumbers\ProtectedNumbers.csproj" />
   </ItemGroup>

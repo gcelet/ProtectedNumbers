@@ -6,8 +6,11 @@ using FastEndpoints;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using ProtectedNumbers.Tests.EndToEnd.Shared.Customization;
 using ProtectedNumbers.Tests.EndToEnd.Shared.MinimalApi;
 using ProtectedNumbers.Tests.EndToEnd.Shared.Repositories;
 using ProtectedNumbers.Tests.EndToEnd.Shared.Validators;
@@ -24,16 +27,41 @@ public static class Extensions
 {
   public static void AddProtectedNumbersEndToEnd(this WebApplicationBuilder builder, string webAppName)
   {
+    EndToEndOptions endToEndOptions = new();
+
+    builder.Configuration.Bind("EndToEnd", endToEndOptions);
+
+    if (!string.IsNullOrEmpty(endToEndOptions.DataProtectionKeysPath) && !Directory.Exists(endToEndOptions.DataProtectionKeysPath!))
+    {
+      string absolutePath = Path.GetFullPath(endToEndOptions.DataProtectionKeysPath!);
+
+      throw new DirectoryNotFoundException($"Data protection keys path does not exist: {absolutePath}");
+    }
+
+    builder.Services.AddHttpLogging(opts =>
+    {
+#if NET8_0_OR_GREATER
+      opts.CombineLogs = true;
+#endif
+      opts.LoggingFields = HttpLoggingFields.All;
+    });
+
     // Required for ProtectedNumbers to work correctly
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddDataProtection(opts =>
       {
         opts.ApplicationDiscriminator = $"ProtectedNumbers.Tests.EndToEnd.{webAppName}";
       })
-      // .PersistKeysToFileSystem(new DirectoryInfo("./DataProtectionKeys"))
+      .PersistKeysToFileSystem(new DirectoryInfo(endToEndOptions.DataProtectionKeysPath!) )
       ;
 
-    builder.Services.AddProtectedNumbers();
+    builder.Services.AddProtectedNumbers(opts =>
+    {
+      if (endToEndOptions.UseCustomSaltProvider)
+      {
+        opts.UseApplicationDataSaltProvider<ApplicationDataSaltProviderCustom>();
+      }
+    });
 
     builder.Services.AddControllers();
     builder.Services.AddFastEndpoints();
@@ -56,6 +84,7 @@ public static class Extensions
 
   public static void UseProtectedNumbersEndToEnd(this WebApplication app)
   {
+    app.UseHttpLogging();
     app.RegisterMinimalApiEndpoints();
     app.MapControllers();
     app.UseFastEndpoints(cfg =>

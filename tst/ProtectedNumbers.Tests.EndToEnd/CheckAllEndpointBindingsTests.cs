@@ -6,9 +6,9 @@ using ConfirmSteps.Steps.Http;
 
 using NUnit.Framework.Internal;
 
-using static StepBuilderExtensions;
+using static ConfirmStepsExtensions;
 
-[TestFixtureSource(typeof(WebApiWithEndpointStackFixtureData), nameof(WebApiWithEndpointStackFixtureData.FixtureParams))]
+[TestFixtureSource(typeof(WebApiWithEndpointStackFixtureData), nameof(WebApiWithEndpointStackFixtureData.All))]
 public class CheckAllEndpointBindingsTests
 {
   public CheckAllEndpointBindingsTests(WebApi webApi, EndpointStack endpointStack)
@@ -22,7 +22,8 @@ public class CheckAllEndpointBindingsTests
   private WebApi WebApi { get; }
 
   [Test]
-  public async Task AllSteps_Should_Returns_Correctly()
+  [CancelAfter(30_000)]
+  public async Task AllSteps_Should_Returns_Correctly(CancellationToken cancellationToken)
   {
     // Arrange
     HttpClient? httpClient = WebApiProvider.GetHttpClient(WebApi);
@@ -36,7 +37,8 @@ public class CheckAllEndpointBindingsTests
         Scenario.New<ScenarioData>("[All-Endpoints-Returns-Correctly]")
           .WithServices(s => s.AddExternalHttpClient(httpClient))
           .WithGlobals(b => b
-            .UseConst(STEP_PATH_PREFIX, EndpointStack.PathPrefix)
+            .UseConst(StepPathPrefix, EndpointStack.PathPrefix)
+            .UseObject(UserId, d => d.UserId)
           )
           .WithSteps(s => s
             .GetAll()
@@ -51,16 +53,15 @@ public class CheckAllEndpointBindingsTests
           )
           .Build()
       ;
-    ScenarioData data = new();
+
+    ScenarioData data = new()
+    {
+      UserId = 26390
+    };
     // Act
-    using CancellationTokenSource cts = new();
     ConfirmStepResult<ScenarioData> confirmResult =
-      await scenario.ConfirmSteps(data, cts.Token);
+      await scenario.ConfirmSteps(data, cancellationToken);
     // Assert
-    confirmResult.ShouldSatisfyAllConditions($"should be a successful confirm result without exception thrown on [{WebApi.Name}-{EndpointStack.Name}]",
-      r => r.Status.ShouldBe(ConfirmStatus.Success),
-      r => r.Exception.ShouldBeNull(),
-      r => r.StepResults.ShouldAllBe(sr => sr.State == StepState.Done && sr.Status == ConfirmStatus.Success)
-    );
+    confirmResult.ShouldBeSuccessfulOnEveryStep(WebApi, EndpointStack);
   }
 }

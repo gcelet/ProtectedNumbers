@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Grégory Célet. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
+
 namespace ProtectedNumbers.Tests.EndToEnd;
 
 public class ScenarioData
@@ -11,4 +12,6 @@ public class ScenarioData
   public string[]? Names { get; set; }
 
   public string[]? ProtectedIds { get; set; }
+
+  public int UserId { get; set; }
 }

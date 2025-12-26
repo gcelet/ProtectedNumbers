@@ -4,29 +4,24 @@ namespace ProtectedNumbers.Tests.EndToEnd;
 
 public class WebApi : IEquatable<WebApi>
 {
-  private WebApi(string name, string resourceName)
+  private WebApi(string name, string resourceName, bool isCustom)
   {
     Name = name;
     ResourceName = resourceName;
+    IsCustom = isCustom;
   }
 
-  public static IEnumerable<WebApi> EnumerateWebApi()
-  {
-    string[] dotnetVersions = [
-      "dotnet6",
-      "dotnet8",
-      "dotnet9",
-      "dotnet10"
-    ];
+  public static IEnumerable<WebApi> EnumerateCustomWebApi() => EnumerateWebApi(
+    includeDotnet6: true, includeDotnet8: true, includeDotnet9: true, includeDotnet10: true,
+    includeDefault: false, includeCustom: true);
 
-    foreach (string dotnetVersion in dotnetVersions)
-    {
-      string resourceName = $"webapi-{dotnetVersion}";
-      WebApi webApi = new(dotnetVersion, resourceName);
+  public static IEnumerable<WebApi> EnumerateDefaultWebApi() => EnumerateWebApi(
+    includeDotnet6: true, includeDotnet8: true, includeDotnet9: true, includeDotnet10: true,
+    includeDefault: true, includeCustom: false);
 
-      yield return webApi;
-    }
-  }
+  public static IEnumerable<WebApi> EnumerateWebApi() => EnumerateWebApi(
+    includeDotnet6: true, includeDotnet8: true, includeDotnet9: true, includeDotnet10: true,
+    includeDefault: true, includeCustom: true);
 
   public static bool operator ==(WebApi? left, WebApi? right)
   {
@@ -37,6 +32,59 @@ public class WebApi : IEquatable<WebApi>
   {
     return !Equals(left, right);
   }
+
+  private static IEnumerable<WebApi> EnumerateWebApi(
+    bool includeDotnet6, bool includeDotnet8, bool includeDotnet9, bool includeDotnet10,
+    bool includeDefault, bool includeCustom)
+  {
+    if (!includeDefault && !includeCustom)
+    {
+      yield break;
+    }
+
+    List<string> dotnetVersions = new();
+    if (includeDotnet6)
+    {
+      dotnetVersions.Add("dotnet6");
+    }
+    if (includeDotnet8)
+    {
+      dotnetVersions.Add("dotnet8");
+    }
+    if (includeDotnet9)
+    {
+      dotnetVersions.Add("dotnet9");
+    }
+    if (includeDotnet10)
+    {
+      dotnetVersions.Add("dotnet10");
+    }
+
+    foreach (string dotnetVersion in dotnetVersions)
+    {
+      string resourceNameBase = $"webapi-{dotnetVersion}";
+
+      if (includeDefault)
+      {
+        string nameDefault = $"{dotnetVersion}-default";
+        string resourceNameDefault = $"{resourceNameBase}-default";
+        WebApi webApiDefault = new(nameDefault, resourceNameDefault, false);
+
+        yield return webApiDefault;
+      }
+
+      if (includeCustom)
+      {
+        string nameCustom = $"{dotnetVersion}-custom";
+        string resourceNameCustom = $"{resourceNameBase}-custom";
+        WebApi webApiCustom = new(nameCustom, resourceNameCustom, true);
+
+        yield return webApiCustom;
+      }
+    }
+  }
+
+  public bool IsCustom { get; }
 
   public string Name { get; }
 
@@ -55,7 +103,7 @@ public class WebApi : IEquatable<WebApi>
       return true;
     }
 
-    return Name == other.Name;
+    return string.Equals(ResourceName, other.ResourceName, StringComparison.Ordinal);
   }
 
   /// <inheritdoc />
@@ -80,7 +128,7 @@ public class WebApi : IEquatable<WebApi>
   }
 
   /// <inheritdoc />
-  public override int GetHashCode() => Name.GetHashCode();
+  public override int GetHashCode() => ResourceName.GetHashCode();
 
   /// <inheritdoc />
   public override string ToString() => Name;
